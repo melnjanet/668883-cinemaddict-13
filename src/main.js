@@ -11,6 +11,7 @@ import {createFooterStatisticsTemplate} from "./view/footer-statistics";
 
 const MAX_FILM_CARD_NUMBER = 5;
 const MAX_EXTRA_FILM_CARD_NUMBER = 2;
+
 const siteHideOverflow = document.contains(document.querySelector(`.hide-overflow`)) ? document.querySelector(`.hide-overflow`) : ``;
 const siteHeaderElement = document.querySelector(`.header`);
 const siteMainElement = document.querySelector(`.main`);
@@ -20,8 +21,8 @@ const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
 };
 
-const renderExtraListElements = (selector, method) => {
-  for (let i = 0; i < MAX_EXTRA_FILM_CARD_NUMBER; i++) {
+const renderListElements = (selector, method, quantity) => {
+  for (let i = 0; i < quantity; i++) {
     render(selector, method, `beforeend`);
   }
 };
@@ -34,26 +35,18 @@ render(siteMainElement, createFilmsTemplate(), `beforeend`);
 
 const siteFilmsElement = siteMainElement.querySelector(`.films`);
 const siteFilmsListElement = siteFilmsElement.querySelector(`.films-list`);
-
 const siteFilmsListContainerElement = siteFilmsListElement.querySelector(`.films-list__container`);
 
-for (let i = 0; i < MAX_FILM_CARD_NUMBER; i++) {
-  render(siteFilmsListContainerElement, createFilmCardTemplate(), `beforeend`);
-}
-
+renderListElements(siteFilmsListContainerElement, createFilmCardTemplate(), MAX_FILM_CARD_NUMBER);
 render(siteFilmsListElement, createShowMoreTemplate(), `beforeend`);
 render(siteFilmsElement, createFilmsListExtra(), `beforeend`);
 
 const siteFilmsListExtraElements = siteFilmsElement.querySelectorAll(`.films-list--extra`);
 
-siteFilmsListExtraElements.forEach((item, index) => {
+siteFilmsListExtraElements.forEach((item) => {
   let siteFilmSListContainer = item.querySelector(`.films-list__container`);
 
-  if (index === 0) {
-    renderExtraListElements(siteFilmSListContainer, createFilmCardTemplate());
-  } else {
-    renderExtraListElements(siteFilmSListContainer, createFilmCardTemplate());
-  }
+  renderListElements(siteFilmSListContainer, createFilmCardTemplate(), MAX_EXTRA_FILM_CARD_NUMBER);
 });
 
 render(siteFooterElement, createFooterStatisticsTemplate(), `beforeend`);
