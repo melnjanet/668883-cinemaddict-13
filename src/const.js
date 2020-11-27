@@ -1,0 +1,6 @@
+const EMOJIS = [`smile`, `sleeping`, `puke`, `angry`];
+const FILM_COUNT_PER_STEP = 5;
+const MAX_FILMS_NUMBER = 25;
+const MAX_EXTRA_FILM_CARD_NUMBER = 2;
+
+export {EMOJIS, FILM_COUNT_PER_STEP, MAX_FILMS_NUMBER, MAX_EXTRA_FILM_CARD_NUMBER};
