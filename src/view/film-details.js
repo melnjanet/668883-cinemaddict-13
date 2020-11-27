@@ -1,43 +1,11 @@
-const createCommentsListTemplate = (comments) => {
-  return new Array(comments.length).fill().map((currElement, index) => {
-    const {emoji, text, author, date} = comments[index];
-
-    return `<li class="film-details__comment">
-              <span class="film-details__comment-emoji">
-                <img src="./images/emoji/${emoji}.png" width="55" height="55" alt="emoji-smile">
-              </span>
-              <div>
-                <p class="film-details__comment-text">${text}</p>
-                <p class="film-details__comment-info">
-                  <span class="film-details__comment-author">${author}</span>
-                  <span class="film-details__comment-day">${date}</span>
-                  <button class="film-details__comment-delete">Delete</button>
-                </p>
-              </div>
-            </li>`;
-  }).join(` `);
-};
-
-const createNewEmojiListTemplate = (emogi) => {
-  return new Array(emogi.length).fill().map((currElement, index) => {
-    return `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-${emogi[index]}" value="${emogi[index]}">
-              <label class="film-details__emoji-label" for="emoji-${emogi[index]}">
-                <img src="./images/emoji/${emogi[index]}.png" width="30" height="30" alt="emoji">
-              </label>`;
-  }).join(` `);
-};
-
 const createGenreListTemplate = (genre) => {
   return new Array(genre.length).fill().map((currElement, index) => {
     return `<span class="film-details__genre">${genre[index]}</span>`;
   }).join(` `);
 };
 
-export const createFilmDetailsTemplate = (emoji, filmCard, comments, genreTitle) => {
+export const createFilmDetailsTemplate = (filmCard, genreTitle) => {
   const {name, originalName, poster, releaseDate, director, writers, actors, country, runtime, genre, age, totalRating, description} = filmCard;
-  const commentItems = createCommentsListTemplate(comments);
-  const commentsCount = comments.length;
-  const emojiItems = createNewEmojiListTemplate(emoji);
   const genreLabel = genreTitle(genre);
   const genreItems = createGenreListTemplate(genre);
 
@@ -73,11 +41,11 @@ export const createFilmDetailsTemplate = (emoji, filmCard, comments, genreTitle)
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Writers</td>
-                <td class="film-details__cell">${writers}</td>
+                <td class="film-details__cell">${writers.join(`, `)}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Actors</td>
-                <td class="film-details__cell">${actors}</td>
+                <td class="film-details__cell">${actors.join(`, `)}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Release Date</td>
@@ -118,25 +86,6 @@ export const createFilmDetailsTemplate = (emoji, filmCard, comments, genreTitle)
       </div>
 
       <div class="film-details__bottom-container">
-        <section class="film-details__comments-wrap">
-          <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count"> ${commentsCount}</span></h3>
-
-          <ul class="film-details__comments-list">
-            ${commentItems}
-          </ul>
-
-          <div class="film-details__new-comment">
-            <div class="film-details__add-emoji-label"></div>
-
-            <label class="film-details__comment-label">
-              <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
-            </label>
-
-            <div class="film-details__emoji-list">
-                ${emojiItems}
-            </div>
-          </div>
-        </section>
       </div>
     </form>
   </section>`;

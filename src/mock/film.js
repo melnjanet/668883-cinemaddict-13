@@ -7,6 +7,34 @@ const TEMPLATE_DESCRIPTION = `Lorem ipsum dolor sit amet, consectetur adipiscing
                              eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. Sed sed nisi
                              sed augue convallis suscipit in sed felis. Aliquam erat volutpat. Nunc fermentum tortor ac
                              porta dapibus. In rutrum ac purus sit amet tempus.`;
+
+const filmDetails = [
+  {
+    name: `The Dance of Life`,
+    origin: `The Dance of Life`,
+    poster: `the-dance-of-life.jpg`
+  },
+  {
+    name: `Sagebrush Trail`,
+    origin: `Sagebrush Trail`,
+    poster: `sagebrush-trail.jpg`
+  },
+  {
+    name: `The Man with the Golden Arm`,
+    origin: `The Man with the Golden Arm`,
+    poster: `the-man-with-the-golden-arm.jpg`
+  },
+  {
+    name: `Santa Claus Conquers the Martians`,
+    origin: `Santa Claus Conquers the Martians`,
+    poster: `santa-claus-conquers-the-martians.jpg`
+  },
+  {
+    name: `Popeye the Sailor Meets Sindbad the Sailor`,
+    origin: `Popeye the Sailor Meets Sindbad the Sailor`,
+    poster: `popeye-meets-sinbad.png`
+  },
+];
 const TotalRating = {
   MIN: 0,
   MAX: 10
@@ -64,34 +92,6 @@ const generateDescription = () => {
 };
 
 const generateFilmInfo = () => {
-  const filmDetails = [
-    {
-      name: `The Dance of Life`,
-      origin: `The Dance of Life`,
-      poster: `the-dance-of-life.jpg`
-    },
-    {
-      name: `Sagebrush Trail`,
-      origin: `Sagebrush Trail`,
-      poster: `sagebrush-trail.jpg`
-    },
-    {
-      name: `The Man with the Golden Arm`,
-      origin: `The Man with the Golden Arm`,
-      poster: `the-man-with-the-golden-arm.jpg`
-    },
-    {
-      name: `Santa Claus Conquers the Martians`,
-      origin: `Santa Claus Conquers the Martians`,
-      poster: `santa-claus-conquers-the-martians.jpg`
-    },
-    {
-      name: `Popeye the Sailor Meets Sindbad the Sailor`,
-      origin: `Popeye the Sailor Meets Sindbad the Sailor`,
-      poster: `popeye-meets-sinbad.png`
-    },
-  ];
-
   const randomIndex = getRandomInteger(0, filmDetails.length - 1);
 
   return filmDetails[randomIndex];

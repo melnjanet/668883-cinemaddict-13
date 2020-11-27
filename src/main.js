@@ -1,3 +1,5 @@
+import {EMOJIS, MAX_FILMS_NUMBER, FILM_COUNT_PER_STEP, MAX_EXTRA_FILM_CARD_NUMBER} from "./const.js";
+import {genreTitle, getRandomInteger} from "./utils.js";
 import {createMainNavigationTemplate} from "./view/main-navigation";
 import {createSortListTemplate} from "./view/sort-list";
 import {createProfileTemplate} from "./view/profile";
@@ -7,13 +9,12 @@ import {createFilmCardTemplate} from "./view/film-card";
 import {createShowMoreTemplate} from "./view/show-more";
 import {createFilmsListExtra} from "./view/films-list-extra";
 import {createFilmDetailsTemplate} from "./view/film-details";
+import {createFilmCommentsTemplate} from "./view/film-comments";
+import {createNewFilmCommentTemplate} from "./view/new-film-comment";
 import {createFooterStatisticsTemplate} from "./view/footer-statistics";
 import {generateFilmCard} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
 import {generateComment} from "./mock/comments";
-import {EMOJIS, MAX_FILMS_NUMBER, FILM_COUNT_PER_STEP, MAX_EXTRA_FILM_CARD_NUMBER} from "./const.js";
-import {genreTitle, getRandomInteger} from "./utils.js";
-
 
 const filmCards = new Array(MAX_FILMS_NUMBER).fill().map(generateFilmCard);
 const filters = generateFilter(filmCards);
@@ -77,5 +78,11 @@ siteFilmsListExtraElements.forEach((item) => {
 render(siteFooterElement, createFooterStatisticsTemplate(MAX_FILMS_NUMBER), `beforeend`);
 
 if (siteHideOverflow) {
-  render(siteHideOverflow, createFilmDetailsTemplate(EMOJIS, filmCards[0], comments[filmCards[0].comments], genreTitle), `beforeend`);
+  render(siteHideOverflow, createFilmDetailsTemplate(filmCards[0], genreTitle), `beforeend`);
+
+  const filmDetailsBottomContainer = siteHideOverflow.querySelector(`.film-details__bottom-container`);
+  render(filmDetailsBottomContainer, createFilmCommentsTemplate(comments[filmCards[0].comments]), `beforeend`);
+
+  const filmDetails = siteHideOverflow.querySelector(`.film-details__comments-wrap`);
+  render(filmDetails, createNewFilmCommentTemplate(EMOJIS), `beforeend`);
 }
