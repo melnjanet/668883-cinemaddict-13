@@ -1,16 +1,18 @@
 import {createElement} from "../utils";
 
-export const createShowMoreTemplate = () => {
-  return `<button class="films-list__show-more">Show more</button>`;
+const createFilmsListTemplate = () => {
+  return `<section class="films-list">
+        <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
+    </section>`;
 };
 
-export default class ShowMore {
+export default class FilmsList {
   constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createShowMoreTemplate();
+    return createFilmsListTemplate();
   }
 
   getElement() {
@@ -25,4 +27,3 @@ export default class ShowMore {
     this._element = null;
   }
 }
-
