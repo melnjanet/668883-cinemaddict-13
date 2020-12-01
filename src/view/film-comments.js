@@ -1,3 +1,5 @@
+import {createElement} from "../utils";
+
 const createCommentsListTemplate = (comments) => {
   return new Array(comments.length).fill().map((currElement, index) => {
     const {emoji, text, author, date} = comments[index];
@@ -18,7 +20,7 @@ const createCommentsListTemplate = (comments) => {
   }).join(` `);
 };
 
-export const createFilmCommentsTemplate = (comments) => {
+const createFilmCommentsTemplate = (comments) => {
   const commentItems = createCommentsListTemplate(comments);
   const commentsCount = comments.length;
 
@@ -31,3 +33,26 @@ export const createFilmCommentsTemplate = (comments) => {
 
         </section>`;
 };
+
+export default class FilmComments {
+  constructor(comments) {
+    this._comments = comments;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createFilmCommentsTemplate(this._comments);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

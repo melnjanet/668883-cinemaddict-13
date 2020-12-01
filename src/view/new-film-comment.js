@@ -1,3 +1,5 @@
+import {createElement} from "../utils";
+
 const createNewEmojiListTemplate = (emogi) => {
   return new Array(emogi.length).fill().map((currElement, index) => {
     return `<input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-${emogi[index]}" value="${emogi[index]}">
@@ -7,8 +9,8 @@ const createNewEmojiListTemplate = (emogi) => {
   }).join(` `);
 };
 
-export const createNewFilmCommentTemplate = (emoji) => {
-  const emojiItems = createNewEmojiListTemplate(emoji);
+const createNewFilmCommentTemplate = (emojis) => {
+  const emojiItems = createNewEmojiListTemplate(emojis);
 
   return `<div class="film-details__new-comment">
             <div class="film-details__add-emoji-label"></div>
@@ -22,3 +24,25 @@ export const createNewFilmCommentTemplate = (emoji) => {
             </div>`;
 };
 
+export default class NewComment {
+  constructor(emojis) {
+    this._emojis = emojis;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createNewFilmCommentTemplate(this._emojis);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
