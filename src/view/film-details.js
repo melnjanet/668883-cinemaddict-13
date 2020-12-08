@@ -1,4 +1,4 @@
-import AbstractView from "./abstract.js";
+import AbstractWithHandler from "./abstract-with-handler.js";
 import dayjs from "dayjs";
 import {getActivitiesClass} from "../utils/common.js";
 
@@ -98,23 +98,15 @@ const createFilmDetailsTemplate = (filmCard, genreTitle) => {
   </section>`;
 };
 
-export default class FilmDetails extends AbstractView {
+export default class FilmDetails extends AbstractWithHandler {
   constructor(filmCard, genre) {
     super();
     this._filmCard = filmCard;
     this._genre = genre;
-
-    this._clickHandler = this._clickHandler.bind(this);
   }
 
   getTemplate() {
     return createFilmDetailsTemplate(this._filmCard, this._genre);
-  }
-
-
-  _clickHandler(evt) {
-    evt.preventDefault();
-    this._callback.click(evt);
   }
 
   setClickHandler(callback) {

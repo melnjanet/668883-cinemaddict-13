@@ -1,6 +1,6 @@
 import Abstract from "../view/abstract.js";
 
-export const popupCreateDelete = (container, child, action) => {
+export const popupToggle = (container, child, action) => {
   if (child instanceof Abstract) {
     child = child.getElement();
   }

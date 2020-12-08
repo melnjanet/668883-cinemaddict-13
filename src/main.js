@@ -1,7 +1,7 @@
 import {EMOJIS, MAX_FILMS_NUMBER, FILM_COUNT_PER_STEP, MAX_EXTRA_FILM_CARD_NUMBER} from "./const.js";
 import {genreTitle, getRandomInteger} from "./utils/common.js";
 import {RenderPosition, render, remove} from "./utils/render.js";
-import {popupCreateDelete} from "./utils/popup.js";
+import {popupToggle} from "./utils/popup.js";
 
 import {generateFilmCard} from "./mock/film.js";
 import {generateFilter} from "./mock/filter.js";
@@ -46,7 +46,7 @@ const renderFilmCard = (FilmListElement, films) => {
       document.body.classList.add(`hide-overflow`);
 
       const siteHideOverflow = document.querySelector(`.hide-overflow`);
-      popupCreateDelete(siteHideOverflow, filmDetailsComponent, true);
+      popupToggle(siteHideOverflow, filmDetailsComponent, true);
 
       const filmDetailsBottomContainer = filmDetailsComponent.getElement().querySelector(`.film-details__bottom-container`);
       render(filmDetailsBottomContainer, new FilmCommentsView(comments[films.comments]), RenderPosition.BEFOREEND);
@@ -56,7 +56,7 @@ const renderFilmCard = (FilmListElement, films) => {
 
       filmDetailsComponent.setClickHandler(() => {
         document.body.classList.remove(`hide-overflow`);
-        popupCreateDelete(siteHideOverflow, filmDetailsComponent, false);
+        popupToggle(siteHideOverflow, filmDetailsComponent, false);
       });
     }
   });
