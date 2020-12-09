@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandom} from "../utils.js";
+import {getRandomInteger, getRandom} from "../utils/common.js";
 
 const TEMPLATE_DESCRIPTION = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non
                              porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut

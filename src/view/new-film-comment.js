@@ -1,4 +1,4 @@
-import {createElement} from "../utils";
+import AbstractView from "./abstract.js";
 
 const createNewEmojiListTemplate = (emogi) => {
   return new Array(emogi.length).fill().map((currElement, index) => {
@@ -24,25 +24,14 @@ const createNewFilmCommentTemplate = (emojis) => {
             </div>`;
 };
 
-export default class NewComment {
+export default class NewComment extends AbstractView {
   constructor(emojis) {
+    super();
     this._emojis = emojis;
     this._element = null;
   }
 
   getTemplate() {
     return createNewFilmCommentTemplate(this._emojis);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

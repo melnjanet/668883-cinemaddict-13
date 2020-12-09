@@ -1,4 +1,4 @@
-import {createElement} from "../utils";
+import AbstractView from "./abstract.js";
 
 const createCommentsListTemplate = (comments) => {
   return new Array(comments.length).fill().map((currElement, index) => {
@@ -34,25 +34,13 @@ const createFilmCommentsTemplate = (comments) => {
         </section>`;
 };
 
-export default class FilmComments {
+export default class FilmComments extends AbstractView {
   constructor(comments) {
+    super();
     this._comments = comments;
-    this._element = null;
   }
 
   getTemplate() {
     return createFilmCommentsTemplate(this._comments);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

@@ -1,5 +1,6 @@
+import AbstractWithHandler from "./abstract-with-handler.js";
 import dayjs from "dayjs";
-import {createElement, getActivitiesClass} from "../utils";
+import {getActivitiesClass} from "../utils/common";
 
 const createFilmCardTemplate = (filmCard) => {
   const {name, poster, releaseDate, runtime, genre, totalRating, commentsCount, description, isWatchList, isHistory, isFavorite} = filmCard;
@@ -29,25 +30,13 @@ const createFilmCardTemplate = (filmCard) => {
         </article>`;
 };
 
-export default class FilmCard {
+export default class FilmCard extends AbstractWithHandler {
   constructor(filmCard) {
+    super();
     this._filmCard = filmCard;
-    this._element = null;
   }
 
   getTemplate() {
     return createFilmCardTemplate(this._filmCard);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
