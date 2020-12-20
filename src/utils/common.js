@@ -1,5 +1,6 @@
 // Функция из интернета по генерации случайного числа из диапазона
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
+import dayjs from "dayjs";
 
 const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -14,11 +15,8 @@ const getRandom = (a = 1, b = 0) => {
   return (lower + Math.random() * (upper - lower)).toFixed(1);
 };
 
-const genreTitle = (genre) => {
-  return genre.length > 1 ? `Genres` : `Genre`;
-};
-
 const getActivitiesClass = (isWatchList, isHistory, isFavorite) => {
+
   return {
     watchListActive: isWatchList ? `film-card__controls-item--active` : ``,
     historyActive: isHistory ? `film-card__controls-item--active` : ``,
@@ -26,4 +24,40 @@ const getActivitiesClass = (isWatchList, isHistory, isFavorite) => {
   };
 };
 
-export {getRandomInteger, getRandom, genreTitle, getActivitiesClass};
+const getActivitiesChecked = (isWatchList, isHistory, isFavorite) => {
+
+  return {
+    watchListActive: isWatchList ? `checked` : ``,
+    historyActive: isHistory ? `checked` : ``,
+    favoriteActive: isFavorite ? `checked` : ``
+  };
+};
+
+
+const updateItem = (items, update) => {
+  const index = items.findIndex((item) => item.id === update.id);
+
+  if (index === -1) {
+    return items;
+  }
+
+  return [
+    ...items.slice(0, index),
+    update,
+    ...items.slice(index + 1)
+  ];
+};
+
+const sortByDate = (filmA, filmB) => {
+  const dateA = dayjs(filmA.releaseDate);
+  const dateB = dayjs(filmB.releaseDate);
+
+  return dateB.diff(dateA, `day`);
+};
+
+
+const sortByRating = (filmA, filmB) => {
+  return Number(filmB.totalRating) - Number(filmA.totalRating);
+};
+
+export {getRandomInteger, getRandom, getActivitiesClass, getActivitiesChecked, updateItem, sortByDate, sortByRating};

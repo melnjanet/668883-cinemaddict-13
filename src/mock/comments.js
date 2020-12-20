@@ -1,6 +1,6 @@
 import {EMOJIS} from "../const.js";
 
-export const generateComment = () => {
+export const generateComments = () => {
   return [
     {
       emoji: EMOJIS[0],

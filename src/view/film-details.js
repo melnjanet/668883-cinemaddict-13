@@ -1,6 +1,6 @@
 import AbstractWithHandler from "./abstract-with-handler.js";
 import dayjs from "dayjs";
-import {getActivitiesClass} from "../utils/common.js";
+import {getActivitiesChecked} from "../utils/common.js";
 
 const createGenreListTemplate = (genre) => {
   return new Array(genre.length).fill().map((currElement, index) => {
@@ -12,7 +12,7 @@ const createFilmDetailsTemplate = (filmCard, genreTitle) => {
   const {name, originalName, poster, releaseDate, director, writers, actors, country, runtime, genre, age, totalRating, description, isWatchList, isHistory, isFavorite} = filmCard;
   const genreLabel = genreTitle(genre);
   const genreItems = createGenreListTemplate(genre);
-  const activitiesClass = getActivitiesClass(isWatchList, isHistory, isFavorite);
+  const activitiesClass = getActivitiesChecked(isWatchList, isHistory, isFavorite);
   const {watchListActive, historyActive, favoriteActive} = activitiesClass;
   const releaseFormattedDate = dayjs(releaseDate).format(`D MMMM YYYY`);
 
@@ -81,14 +81,14 @@ const createFilmDetailsTemplate = (filmCard, genreTitle) => {
         </div>
 
         <section class="film-details__controls">
-          <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist">
-          <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist ${watchListActive}">Add to watchlist</label>
+          <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist" ${watchListActive}>
+          <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">Add to watchlist</label>
 
-          <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched">
-          <label for="watched" class="film-details__control-label film-details__control-label--watched ${historyActive}">Already watched</label>
+          <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched" ${historyActive}>
+          <label for="watched" class="film-details__control-label film-details__control-label--watched">Already watched</label>
 
-          <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite">
-          <label for="favorite" class="film-details__control-label film-details__control-label--favorite ${favoriteActive}">Add to favorites</label>
+          <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite" ${favoriteActive}>
+          <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
         </section>
       </div>
 
@@ -113,5 +113,17 @@ export default class FilmDetails extends AbstractWithHandler {
     this._callback.click = callback;
 
     this.getElement().querySelector(`.film-details__close`).addEventListener(`click`, this._clickHandler);
+  }
+
+  setWatchListClickHandler(callback) {
+    this.getElement().querySelector(`input[name="watchlist"]`).addEventListener(`change`, callback);
+  }
+
+  setHistoryClickHandler(callback) {
+    this.getElement().querySelector(`input[name="watched"]`).addEventListener(`change`, callback);
+  }
+
+  setFavoriteClickHandler(callback) {
+    this.getElement().querySelector(`input[name="favorite"]`).addEventListener(`change`, callback);
   }
 }

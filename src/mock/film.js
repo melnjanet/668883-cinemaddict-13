@@ -1,4 +1,5 @@
 import {getRandomInteger, getRandom} from "../utils/common.js";
+import {nanoid} from "../utils/nanoid.js";
 
 const TEMPLATE_DESCRIPTION = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non
                              porta ligula feugiat eget. Fusce tristique felis at fermentum pharetra. Aliquam id orci ut
@@ -99,7 +100,9 @@ const generateFilmInfo = () => {
 
 export const generateFilmCard = () => {
   const filmInfo = generateFilmInfo();
+  const commentsCount = getRandomInteger(CommentsCount.MIN, CommentsCount.MAX);
   return {
+    id: nanoid(),
     name: filmInfo.name,
     originalName: filmInfo.origin,
     poster: filmInfo.poster,
@@ -112,9 +115,8 @@ export const generateFilmCard = () => {
     genre: new Array(getRandomInteger(1, genres.length - 1)).fill().map((currentElement, index) => genres[index]),
     age: generateRandomData(ages),
     totalRating: getRandom(TotalRating.MIN, TotalRating.MAX),
-    commentsCount: getRandomInteger(CommentsCount.MIN, CommentsCount.MAX),
     description: generateDescription(),
-    comments: getRandomInteger(CommentsCount.MIN, CommentsCount.MAX),
+    comments: new Array(commentsCount).fill().map((currentElement, index) =>index),
     isWatchList: Boolean(getRandomInteger(0, 1)),
     isHistory: Boolean(getRandomInteger(0, 1)),
     isFavorite: Boolean(getRandomInteger(0, 1)),
