@@ -40,14 +40,11 @@ export default class Film {
 
     if (prevFilmComponent) {
       replace(this._filmCardComponent, prevFilmComponent);
+      remove(prevFilmComponent);
     } else {
       render(this._filmListContainer, this._filmCardComponent, RenderPosition.BEFOREEND);
-      return;
     }
-
-    remove(prevFilmComponent);
   }
-
 
   resetView() {
     if (this._mode !== Mode.CLOSED) {
